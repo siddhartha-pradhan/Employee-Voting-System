@@ -4,6 +4,8 @@ using System.Configuration;
 using System.Data.OracleClient;
 using System.Web.UI.WebControls;
 using System.Runtime.Remoting.Messaging;
+using System.Web.UI.DataVisualization.Charting;
+using System.Collections.Generic;
 
 namespace EmployeeVotingSystem.Data
 {
@@ -177,6 +179,38 @@ namespace EmployeeVotingSystem.Data
 			}
 		}
 
+        public List<EmployeeCount> CountQuery()
+        {
+            var employeeCount = new List<EmployeeCount>();
+
+            var query = "SELECT D.DEPARTMENT_NAME, COUNT(*) AS TOTAL_EMPLOYEES " + 
+                        "FROM EMPLOYEES E " +
+                        "JOIN DEPARTMENTS D " +
+                        "ON E.DEPARTMENT_ID = D.DEPARTMENT_ID " +
+                        "GROUP BY E.DEPARTMENT_ID, D.DEPARTMENT_NAME " +
+                        "ORDER BY D.DEPARTMENT_NAME";
+
+            using(var connection = new OracleConnection(_connectionString))
+            {
+                connection.Open();
+
+                var command = new OracleCommand(query, connection);
+
+                var reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    employeeCount.Add(new EmployeeCount()
+                    {
+                        DepartmentName = reader["DEPARTMENT_NAME"].ToString(),
+                        Count = Int32.Parse(reader["TOTAL_EMPLOYEES"].ToString())
+                    });
+                }
+
+                return employeeCount;
+            }
+        }
+
         public string FillGridView(string query, GridView dataGrid)
         {
             var result = "";
@@ -260,5 +294,12 @@ namespace EmployeeVotingSystem.Data
         public DateTime HireDate { get; set; }
 
         public string Supervisor { get; set; }
+    }
+
+    public class EmployeeCount
+    {
+        public string DepartmentName { get; set; }
+
+        public int Count { get; set; }
     }
 }

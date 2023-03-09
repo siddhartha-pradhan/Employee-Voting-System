@@ -64,9 +64,24 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <asp:Chart ID="dataChart" runat="server" Width="1500px" Height="400px">
+                        <Titles><asp:Title Text="Working Employees"></asp:Title></Titles>
+                        <series>
+                            <asp:Series Name="DataSeries" ChartArea="ChartAreaData">
+                            </asp:Series>
+                        </series>
+                        <chartareas>
+                            <asp:ChartArea Name="ChartAreaData">
+                                <AxisX Title="Departments"></AxisX>
+                                <AxisY Title="Total Employees"></AxisY>
+                            </asp:ChartArea>
+                        </chartareas>
+                    </asp:Chart>
+                </div>
             </div>
         </div>
     </body>
     </html>
-    
 </asp:Content>
+
