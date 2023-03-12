@@ -3,8 +3,8 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid">
         <div class="card mb-3">
-            <div class="card-header text-center bg-primary text-white">
-                <h4><%: Title %> Index</h4>
+            <div class="card-header text-center bg-white">
+                <h4 style="color: #976CFE;"><%: Title %> Index</h4>
             </div>
             <div class="card-body">
                 <div class="row justify-content-center">
@@ -19,6 +19,7 @@
                     <div class="col-md-3">
                         <asp:Label runat="server" AssociatedControlID="jobID" CssClass="m-1"><b>Job Title</b></asp:Label><br />
                         <asp:DropDownList ID="jobID" CssClass="form-select input-sm" runat="server">
+                            <asp:ListItem Enabled="true" Text="Select Subject" Value= "-1"></asp:ListItem>
                         </asp:DropDownList>
                     </div>
                 </div>
@@ -65,7 +66,7 @@
     <style type="text/css">
         .GridHeader th {
             color: white !important;
-            background-color: #593196;
+            background-color: #7322CE;
             font-size: 15px;
         }
 

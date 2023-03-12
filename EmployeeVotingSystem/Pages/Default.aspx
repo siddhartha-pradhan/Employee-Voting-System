@@ -2,7 +2,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <!DOCTYPE html>
-    <html xmlns="http://www.w3.org/1999/xhtml">
+    <html>
     <body>
         <div class="app-content pt-3 p-md-3 p-lg-4">
             <div class="container-xl">
@@ -16,7 +16,7 @@
                                     <asp:Label ID="departments" runat="server"></asp:Label>
                                 </div>
                                 <div class="stats-meta text-success">
-                                    20%
+                                    Conduction
                                 </div>
                             </div>
                             <a class="app-card-link-mask" href="#"></a>
@@ -31,7 +31,7 @@
                                     <asp:Label ID="employees" runat="server"></asp:Label>
                                 </div>
                                 <div class="stats-meta text-success">
-                                    5%
+                                    Work Rate
                                 </div>
                             </div>
                             <a class="app-card-link-mask" href="#"></a>
@@ -44,7 +44,7 @@
                                 <div class="stats-figure">
                                     <asp:Label ID="jobs" runat="server"></asp:Label>
                                 </div>
-                                <div class="stats-meta">
+                                <div class="stats-meta text-success">
                                     Open
                                 </div>
                             </div>
@@ -58,14 +58,16 @@
                                 <div class="stats-figure">
                                     <asp:Label ID="roles" runat="server"></asp:Label>
                                 </div>
-                                <div class="stats-meta">New</div>
+                                <div class="stats-meta text-success">
+                                    New
+                                </div>
                             </div>
                             <a class="app-card-link-mask" href="#"></a>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <asp:Chart ID="dataChart" runat="server" Width="1500px" Height="400px">
+                    <asp:Chart ID="dataChart" runat="server" Width="1500px" Height="400px" ToolTip="MyChart">
                         <Titles><asp:Title Text="Working Employees"></asp:Title></Titles>
                         <series>
                             <asp:Series Name="DataSeries" ChartArea="ChartAreaData">
@@ -83,5 +85,13 @@
         </div>
     </body>
     </html>
+    <style>
+        img[title$='MyOfficeChart']
+            {
+                height:auto !important;
+                width:auto !important;
+                min-width:0 !important;
+            }
+    </style>
 </asp:Content>
 

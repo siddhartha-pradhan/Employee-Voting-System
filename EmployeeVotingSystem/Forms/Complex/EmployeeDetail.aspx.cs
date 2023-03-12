@@ -44,7 +44,7 @@ namespace EmployeeVotingSystem.Forms.Complex
 						  "ON J.JOB_ID = R.JOB_ID " +
 						  "JOIN DEPARTMENTS D " +
 						  "ON D.DEPARTMENT_ID = EH.DEPARTMENT_ID " +
-						 $"WHERE E.DEPARTMENT_ID != EH.DEPARTMENT_ID AND EH.EMPLOYEE_ID = {_employeeID} " + 
+						 $"WHERE E.DEPARTMENT_ID != EH.DEPARTMENT_ID AND E.ROLE_ID != EH.ROLE_ID AND EH.EMPLOYEE_ID = {_employeeID} " + 
 						 @"ORDER BY ""Start Date"" ";
 
 

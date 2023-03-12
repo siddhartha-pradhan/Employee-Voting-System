@@ -3,8 +3,8 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid">
         <div class="card mb-3">
-            <div class="card-header text-center bg-primary text-white">
-                <h4><%: Title %> Index</h4>
+            <div class="card-header text-center bg-white">
+                <h4 style="color: #976CFE;"><%: Title %> Index</h4>
             </div>
             <div class="card-body">
                 <div class="row justify-content-center">
@@ -47,7 +47,7 @@
                             Width="100%"
                             OnSelectedIndexChanged="SelectIndexChanged"
                             CssClass="table table-bordered table-striped"
-                            SelectedRowStyle-BackColor="#E6E6FA"
+                            SelectedRowStyle-BackColor="#D95BFE"
                             GridLines="Both"
                             AllowPaging="true"
                             PageSize="8"
@@ -69,7 +69,7 @@
     <style type="text/css">
         .GridHeader th {
             color: white !important;
-            background-color: #593196;
+            background-color: #7322CE;
             font-size: 15px;
         }
 
@@ -99,6 +99,7 @@
                 color: #fff;
                 border-radius: 20%;
                 padding: 5px 10px 5px 10px;
+                margin: auto 50%;
             }
 
         .GridSelector {

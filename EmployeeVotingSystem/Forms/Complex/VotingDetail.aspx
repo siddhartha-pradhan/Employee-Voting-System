@@ -3,8 +3,8 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid">
         <div class="card mb-3">
-            <div class="card-header text-center bg-primary text-white">
-                <h4><%: Title %></h4>
+            <div class="card-header text-center bg-white">
+                <h4 style="color: #976CFE;"><%: Title %> Index</h4>
             </div>
             <div class="card-body">
                 <div class="row justify-content-center">
@@ -44,7 +44,7 @@
         </div>
 
         <div class="card mb-3">
-            <div class="card-header text-center bg-primary text-white">
+            <div class="card-header text-center text-white" style="background-color: #7322CE">
                 <h4>Voting History</h4>
             </div>
         </div>
@@ -73,7 +73,7 @@
     <style type="text/css">
         .GridHeader th {
             color: white !important;
-            background-color: #593196;
+            background-color: #7322CE;
             font-size: 15px;
         }
 

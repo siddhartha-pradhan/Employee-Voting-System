@@ -6,8 +6,8 @@
 
     <div class="container-fluid">
         <div class="card mb-3">
-            <div class="card-header text-center bg-primary text-white">
-                <h4><%: Title %> Index</h4>
+            <div class="card-header text-center bg-white">
+                <h4 style="color: #976CFE;"><%: Title %> Index</h4>
             </div>
             <div class="card-body">
                 <div class="row justify-content-center">
@@ -22,6 +22,7 @@
                     <div class="col-md-3">
                         <asp:Label runat="server" AssociatedControlID="departmentFloor" CssClass="m-1"><b>Floor</b></asp:Label><br />
                         <asp:DropDownList ID="departmentFloor" CssClass="form-select input-sm" runat="server">
+                            <asp:ListItem Selected="True" Value="" Text="Select a floor" />
                             <asp:ListItem Text="1" />
                             <asp:ListItem Text="2" />
                             <asp:ListItem Text="3" />
@@ -73,7 +74,7 @@
     <style type="text/css">
         .GridHeader th {
             color: white !important;
-            background-color: #593196;
+            background-color: #7322CE;
             font-size: 15px;
         }
 
