@@ -12,31 +12,35 @@
                         <asp:Label runat="server" AssociatedControlID="employeeID" CssClass="m-1"><b>Employee ID</b></asp:Label><br />
                         <asp:TextBox runat="server" required="required" Enabled="True" name="BrandName" ID="employeeID" class="form-control input-sm" ReadOnly="true"></asp:TextBox>
                     </div>
-                    <div class="col-md-3 ">
+                    <div class="col-md-2 ">
                         <asp:Label runat="server" AssociatedControlID="employeeName" CssClass="m-1"><b>Employee Name</b></asp:Label><br />
                         <asp:TextBox runat="server" required="required" Enabled="True" name="BrandName" ID="employeeName" class="form-control input-sm" ReadOnly="true"></asp:TextBox>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <asp:Label runat="server" AssociatedControlID="contactNumber" CssClass="m-1"><b>Contact Number</b></asp:Label><br />
                         <asp:TextBox runat="server" required="required" Enabled="True" name="BrandName" ID="contactNumber" class="form-control input-sm" ReadOnly="true"></asp:TextBox>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <asp:Label runat="server" AssociatedControlID="salary" CssClass="m-1"><b>Salary</b></asp:Label><br />
                         <asp:TextBox runat="server" required="required" Enabled="True" name="BrandName" ID="salary" class="form-control input-sm" ReadOnly="true"></asp:TextBox>
                     </div>
+                    <div class="col-md-2">
+                        <asp:Label runat="server" AssociatedControlID="supervisorID" CssClass="m-1"><b>Supervisor</b></asp:Label><br />
+                        <asp:TextBox runat="server" required="required" Enabled="True" name="BrandName" ID="supervisorID" class="form-control input-sm" ReadOnly="true"></asp:TextBox>
+                    </div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <asp:Label runat="server" AssociatedControlID="dateOfBirth" CssClass="m-1"><b>Date Of Birth</b></asp:Label><br />
                         <asp:TextBox runat="server" required="required" Enabled="True" name="BrandName" ID="dateOfBirth" class="form-control input-sm" ReadOnly="true"></asp:TextBox>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <asp:Label runat="server" AssociatedControlID="hireDate" CssClass="m-1"><b>Hire Date</b></asp:Label><br />
                         <asp:TextBox runat="server" required="required" Enabled="True" name="BrandName" ID="hireDate" class="form-control input-sm" ReadOnly="true"></asp:TextBox>
                     </div>
-                    <div class="col-md-3">
-                        <asp:Label runat="server" AssociatedControlID="supervisorID" CssClass="m-1"><b>Supervisor</b></asp:Label><br />
-                        <asp:TextBox runat="server" required="required" Enabled="True" name="BrandName" ID="supervisorID" class="form-control input-sm" ReadOnly="true"></asp:TextBox>
+                    <div class="col-md-2">
+                        <asp:Label runat="server" AssociatedControlID="workingMonths" CssClass="m-1"><b>Total Working Months</b></asp:Label><br />
+                        <asp:TextBox runat="server" required="required" Enabled="True" name="BrandName" ID="workingMonths" class="form-control input-sm" ReadOnly="true"></asp:TextBox>
                     </div>
                 </div>
                 <br />

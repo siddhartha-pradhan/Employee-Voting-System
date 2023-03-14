@@ -37,6 +37,7 @@ namespace EmployeeVotingSystem.Forms.Complex
 			dateOfBirth.Text = (employee.DateOfBirth).ToString("dd MMMM yyyy");
 			hireDate.Text = employee.HireDate.ToString("dd MMMM yyyy");
 			supervisorID.Text = employee.Supervisor;
+			workingMonths.Text = employee.WorkingMonths.ToString();	
 
 			var detail = @"SELECT VH.VOTING_YEAR ""Voting Year"", VH.VOTING_MONTH ""Voting Month"", VH.CANDIDATE_ID ""Candidate ID"", " +
 						 @"E.FULL_NAME ""Employee Name"", E.DEPARTMENT_ID ""Department ID"", D.DEPARTMENT_NAME ""Department Name"", " +

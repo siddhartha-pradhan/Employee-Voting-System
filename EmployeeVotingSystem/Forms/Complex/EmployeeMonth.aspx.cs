@@ -59,6 +59,7 @@ namespace EmployeeVotingSystem.Forms.Complex
 			dateOfBirth.Text = (employee.DateOfBirth).ToString("dd MMMM yyyy");
 			hireDate.Text = employee.HireDate.ToString("dd MMMM yyyy");
 			supervisorID.Text = employee.Supervisor;
+			workingMonths.Text = employee.WorkingMonths.ToString();	
 
 			var query = @"SELECT * FROM " +
 						@"(SELECT VH.CANDIDATE_ID ""Candidate ID"", E.FULL_NAME ""Candidate Name"", COUNT(CANDIDATE_ID) ""Vote Count"" " +

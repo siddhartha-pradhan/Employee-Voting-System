@@ -31,8 +31,11 @@
                         </asp:DropDownList>
                     </div>
                 </div>
+                <div class="row justify-content-center mt-3 offset-4">
+                    <asp:Label ID="labelMessage" runat="server" CssClass="text-danger"><b></b></asp:Label><br />
+                </div>
                 <br />
-                <div class="row justify-content-center offset-1 mb-2">
+                <div class="row justify-content-center offset-1 mb-3">
                     <div class="col-9 offset-1">
                         <asp:Button Text="Add" ID="addButton" OnClick="AddDepartment" CssClass="btn btn-primary text-white" Width="135px" runat="server" />
                         <asp:Button Text="Update" ID="updateButton" OnClick="UpdateDepartment" CssClass="btn btn-secondary text-dark" Width="135px" runat="server" />

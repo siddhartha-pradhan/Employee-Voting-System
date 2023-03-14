@@ -31,11 +31,13 @@ namespace EmployeeVotingSystem.Forms.Complex
 			salary.Text = employee.Salary.ToString();
 			dateOfBirth.Text = (employee.DateOfBirth).ToString("dd MMMM yyyy");
 			hireDate.Text = employee.HireDate.ToString("dd MMMM yyyy");
+			workingMonths.Text = employee.WorkingMonths.ToString();
 			supervisorID.Text = employee.Supervisor; 
 
 			var detail = @"SELECT R.ROLE_ID ""Role ID"", R.ROLE_TYPE ""Role Type"", J.JOB_ID ""Job ID"", J.JOB_TITLE ""Job Title"", " + 
-						 @"D.DEPARTMENT_ID ""Department ID"", D.DEPARTMENT_NAME ""Department Name"", EH.START_DATE ""Start Date"", EH.END_DATE ""End Date"" " + 
-						 @"FROM EMPLOYEES E " +
+						 @"D.DEPARTMENT_ID ""Department ID"", D.DEPARTMENT_NAME ""Department Name"", EH.START_DATE ""Start Date"", EH.END_DATE ""End Date"", " +
+                         @"(TRUNC(TO_DATE(END_DATE, 'DD-MON-YYYY') - TO_DATE(START_DATE, 'DD-MON-YYYY'))) ""Days Between"" " +
+                         @"FROM EMPLOYEES E " +
 						 @"JOIN ""Employee.History"" EH " +
 						  "ON E.EMPLOYEE_ID = EH.EMPLOYEE_ID " +
 						  "JOIN ROLES R " + 
@@ -47,8 +49,7 @@ namespace EmployeeVotingSystem.Forms.Complex
 						 $"WHERE E.DEPARTMENT_ID != EH.DEPARTMENT_ID AND E.ROLE_ID != EH.ROLE_ID AND EH.EMPLOYEE_ID = {_employeeID} " + 
 						 @"ORDER BY ""Start Date"" ";
 
-
-			_dataLayer.FillGridView(detail, gridView);
+            _dataLayer.FillGridView(detail, gridView);
 		}
 	}
 }

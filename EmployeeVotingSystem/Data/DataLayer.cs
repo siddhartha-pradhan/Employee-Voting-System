@@ -6,6 +6,7 @@ using System.Web.UI.WebControls;
 using System.Runtime.Remoting.Messaging;
 using System.Web.UI.DataVisualization.Charting;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace EmployeeVotingSystem.Data
 {
@@ -76,10 +77,6 @@ namespace EmployeeVotingSystem.Data
                 {
                     result = _message = $"{title} Successfully Inserted.";
                 }
-                if (query.ToLower().Contains("insert"))
-                {
-                    result = _message = $"{title} Successfully Inserted.";
-                }
                 if (query.ToLower().Contains("delete"))
                 {
                     result = _message = $"{title} Successfully Deleted.";
@@ -91,8 +88,15 @@ namespace EmployeeVotingSystem.Data
             }
             catch (Exception ex)
             {
-                result = _message = $"Failed to execute {query}: {ex.Message}";
-                throw ex;
+                if(ex.ToString().ToLower().Contains("unique constraint"))
+                {
+                    result = _message = $"Unable to add record, record with the same ID found.";
+                }
+                else
+                {
+                    result = _message = $"{ex.Message}";
+                }
+
             }
             finally
             {
@@ -136,7 +140,8 @@ namespace EmployeeVotingSystem.Data
 
         public Employee DetailQuery(int id)
         {
-            var query = "SELECT E.EMPLOYEE_ID, E.FULL_NAME, E.CONTACT_NUMBER, E.SALARY, E.DATE_OF_BIRTH, E.HIRE_DATE, EMP.FULL_NAME " +
+            var query = "SELECT E.EMPLOYEE_ID, E.FULL_NAME, E.CONTACT_NUMBER, E.SALARY, E.DATE_OF_BIRTH, E.HIRE_DATE, EMP.FULL_NAME, " +
+                        "FLOOR(MONTHS_BETWEEN(SYSDATE, E.HIRE_DATE)) " +
                         "FROM EMPLOYEES E " +
                         "LEFT JOIN EMPLOYEES EMP " +
                         "ON E.SUPERVISOR_ID = EMP.EMPLOYEE_ID " +
@@ -165,7 +170,8 @@ namespace EmployeeVotingSystem.Data
                             employee.DateOfBirth = reader.GetDateTime(4);
                             employee.HireDate = reader.GetDateTime(5);
                             employee.Supervisor = reader.GetValue(6) == DBNull.Value ? String.Empty : reader.GetString(6);
-					    }
+                            employee.WorkingMonths = reader.GetDecimal(7);
+                        }
 
 						return employee;
 					}
@@ -246,7 +252,28 @@ namespace EmployeeVotingSystem.Data
             return result;
         }
 
-		public DataTable FillDropDown(string query, DropDownList dropDown, string title, string value)
+        public string ReturnEmployees(string query)
+        {
+            var employeeCount = new List<int>();
+
+            using (var connection = new OracleConnection(_connectionString))
+            {
+                connection.Open();
+
+                var command = new OracleCommand(query, connection);
+
+                var reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    employeeCount.Add(reader.GetInt32(0));
+                }
+
+                return string.Join(", ", employeeCount);
+            }
+        }
+
+        public DataTable FillDropDown(string query, DropDownList dropDown, string title, string value)
 		{
 			_dataTable = new DataTable();
 
@@ -292,6 +319,8 @@ namespace EmployeeVotingSystem.Data
         public DateTime DateOfBirth { get; set; }
 
         public DateTime HireDate { get; set; }
+
+        public decimal WorkingMonths { get; set; }
 
         public string Supervisor { get; set; }
     }

@@ -56,9 +56,12 @@ namespace EmployeeVotingSystem.Forms.Simple
 
             var result = _dataLayer.QueryExecution(query, "Department");
 
+            labelMessage.Text = result;
+
             departmentID.Text = "";
             departmentName.Text = "";
             departmentFloor.Text = "";
+
         }
 
         protected void NotifyFunction(object sender, EventArgs e)
@@ -75,6 +78,8 @@ namespace EmployeeVotingSystem.Forms.Simple
                            $"WHERE DEPARTMENT_ID = '{departmentID.Text}'";
 
             var result = _dataLayer.QueryExecution(query, "Department");
+            
+            labelMessage.Text = result;
 
             departmentID.Text = "";
             departmentName.Text = "";
@@ -86,6 +91,8 @@ namespace EmployeeVotingSystem.Forms.Simple
             string query = $"DELETE FROM DEPARTMENTS WHERE DEPARTMENT_ID = '{departmentID.Text}'";
 
             var result = _dataLayer.QueryExecution(query, "Department");
+
+            labelMessage.Text = result;
 
             departmentID.Text = "";
             departmentName.Text = "";
@@ -99,6 +106,7 @@ namespace EmployeeVotingSystem.Forms.Simple
             departmentID.Text = "";
             departmentName.Text = "";
             departmentFloor.Text = "";
+            labelMessage.Text = "";
         }
 
         

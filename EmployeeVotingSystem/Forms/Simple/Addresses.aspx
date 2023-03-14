@@ -47,7 +47,7 @@
                             Width="100%"
                             OnSelectedIndexChanged="SelectIndexChanged"
                             CssClass="table table-bordered table-striped"
-                            SelectedRowStyle-BackColor="#D95BFE"
+                            SelectedRowStyle-BackColor="#E6E6FA"
                             GridLines="Both"
                             AllowPaging="true"
                             PageSize="8"
@@ -99,7 +99,6 @@
                 color: #fff;
                 border-radius: 20%;
                 padding: 5px 10px 5px 10px;
-                margin: auto 50%;
             }
 
         .GridSelector {

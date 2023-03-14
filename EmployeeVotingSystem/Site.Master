@@ -54,11 +54,11 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Simple Forms</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="Forms/Simple/Departments.aspx">Departments</a>
-                                        <a class="dropdown-item" href="Forms/Simple/Jobs.aspx">Jobs</a>
-                                        <a class="dropdown-item" href="Forms/Simple/Roles.aspx">Roles</a>
-                                        <a class="dropdown-item" href="Forms/Simple/Addresses.aspx">Addresses</a>
-                                        <a class="dropdown-item" href="Forms/Simple/Employees.aspx">Employees</a>
+                                        <a class="dropdown-item" runat="server" href="~/Forms/Simple/Departments.aspx">Departments</a>
+                                        <a class="dropdown-item" runat="server" href="~/Forms/Simple/Jobs.aspx">Jobs</a>
+                                        <a class="dropdown-item" runat="server" href="~/Forms/Simple/Roles.aspx">Roles</a>
+                                        <a class="dropdown-item" runat="server" href="~/Forms/Simple/Addresses.aspx">Addresses</a>
+                                        <a class="dropdown-item" runat="server" href="~/Forms/Simple/Employees.aspx">Employees</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">

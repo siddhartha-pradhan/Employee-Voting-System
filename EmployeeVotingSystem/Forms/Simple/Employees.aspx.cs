@@ -136,9 +136,6 @@ namespace EmployeeVotingSystem.Forms.Simple
             dateOfBirth.Text = "";
             hireDate.Text = "";
             salary.Text = "";
-            roleID.Text = "";
-            departmentID.Text = "";
-            supervisorID.Text = "";
         }
 
         protected void DeleteEmployee(object sender, EventArgs e)
@@ -153,9 +150,6 @@ namespace EmployeeVotingSystem.Forms.Simple
             dateOfBirth.Text = "";
             hireDate.Text = "";
             salary.Text = "";
-            roleID.Text = "";
-            departmentID.Text = "";
-            supervisorID.Text = "";
 
             ClearTextFields(sender, e);
         }

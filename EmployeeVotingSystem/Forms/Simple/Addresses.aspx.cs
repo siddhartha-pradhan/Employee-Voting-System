@@ -19,7 +19,7 @@ namespace EmployeeVotingSystem.Forms.Simple
         protected void Page_Load(object sender, EventArgs e)
         {
             var query = @"SELECT ADDRESS_ID ""Address ID"", ADDRESS ""Address"", STATE ""State"", ZIP ""ZIP""" +
-                         "FROM ADDRESSES";
+                         "FROM ADDRESSES ORDER BY ADDRESS_ID";
 
             _dataLayer = new DataLayer();
             _dataLayer.FillGridView(query, gridView);
@@ -59,7 +59,7 @@ namespace EmployeeVotingSystem.Forms.Simple
                            $"ADDRESSES (ADDRESS_ID, ADDRESS, STATE, ZIP) " +
                            $"VALUES ({addressId},'{address.Text}', '{state.Text}', {zip.Text})";
 
-            var result = _dataLayer.QueryExecution(query, "job");
+            var result = _dataLayer.QueryExecution(query, "Job");
 
             addressID.Text = "";
             address.Text = "";
@@ -80,7 +80,7 @@ namespace EmployeeVotingSystem.Forms.Simple
                            $"ZIP = {zip.Text} " +
                            $"WHERE ADDRESS_ID = {addressID.Text} ";
 
-			var result = _dataLayer.QueryExecution(query, "job");
+			var result = _dataLayer.QueryExecution(query, "Job");
 
             addressID.Text = "";
             address.Text = "";
@@ -92,7 +92,7 @@ namespace EmployeeVotingSystem.Forms.Simple
         {
             string query = $"DELETE FROM ADDRESSES WHERE ADDRESS_ID = {addressID.Text}";
 
-			var result = _dataLayer.QueryExecution(query, "job");
+			var result = _dataLayer.QueryExecution(query, "Job");
 
             addressID.Text = "";
             address.Text = "";
