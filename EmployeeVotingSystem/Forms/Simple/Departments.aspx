@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-center mt-3 offset-4">
-                    <asp:Label ID="labelMessage" runat="server" CssClass="text-danger"><b></b></asp:Label><br />
+                    <asp:Label ID="labelMessage" runat="server"><b></b></asp:Label><br />
                 </div>
                 <br />
                 <div class="row justify-content-center offset-1 mb-3">

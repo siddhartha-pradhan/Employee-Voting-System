@@ -23,6 +23,9 @@
                         </asp:DropDownList>
                     </div>
                 </div>
+                <div class="row justify-content-center mt-3 offset-4">
+                    <asp:Label ID="labelMessage" runat="server"><b></b></asp:Label><br />
+                </div>
                 <br />
                 <div class="row justify-content-center offset-1 mb-2">
                     <div class="col-9 offset-1">

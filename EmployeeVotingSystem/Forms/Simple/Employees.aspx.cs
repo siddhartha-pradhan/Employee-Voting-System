@@ -21,38 +21,41 @@ namespace EmployeeVotingSystem.Forms.Simple
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var query = @"SELECT E.EMPLOYEE_ID ""Employee ID"", E.FULL_NAME ""Employee Name"", E.CONTACT_NUMBER ""Contact Number"", " +
-                        @"E.DATE_OF_BIRTH ""Date of Birth"", E.HIRE_DATE ""Hire Date"", E.SALARY ""Salary"", " +
-                        @"R.ROLE_TYPE ""Role"", D.DEPARTMENT_NAME ""Department"", EMP.FULL_NAME ""Supervisor"" " +
-                         "FROM EMPLOYEES E " +
-                         "JOIN ROLES R " +
-                         "ON E.ROLE_ID = R.ROLE_ID " +
-                         "JOIN DEPARTMENTS D " +
-                         "ON E.DEPARTMENT_ID = D.DEPARTMENT_ID " +
-                         "LEFT JOIN EMPLOYEES EMP " +
-                         "ON E.SUPERVISOR_ID = EMP.EMPLOYEE_ID " +
-                         "ORDER BY E.EMPLOYEE_ID";
+			var query = @"SELECT E.EMPLOYEE_ID ""Employee ID"", E.FULL_NAME ""Employee Name"", E.CONTACT_NUMBER ""Contact Number"", " +
+						@"E.DATE_OF_BIRTH ""Date of Birth"", E.HIRE_DATE ""Hire Date"", E.SALARY ""Salary"", " +
+						@"R.ROLE_TYPE ""Role"", D.DEPARTMENT_NAME ""Department"", EMP.FULL_NAME ""Supervisor"" " +
+						 "FROM EMPLOYEES E " +
+						 "JOIN ROLES R " +
+						 "ON E.ROLE_ID = R.ROLE_ID " +
+						 "JOIN DEPARTMENTS D " +
+						 "ON E.DEPARTMENT_ID = D.DEPARTMENT_ID " +
+						 "LEFT JOIN EMPLOYEES EMP " +
+						 "ON E.SUPERVISOR_ID = EMP.EMPLOYEE_ID " +
+						 "ORDER BY E.EMPLOYEE_ID";
+			
+            _dataLayer.FillGridView(query, gridView);
 
-			var roleQuery = "SELECT ROLE_ID, ROLE_TYPE FROM ROLES";
-			var roleTitle = "ROLE_TYPE";
-			var roleValue = "ROLE_ID";
-			var roleDropDownList = roleID;
+			if (!IsPostBack)
+            {
+				var roleQuery = "SELECT ROLE_ID, ROLE_TYPE FROM ROLES";
+				var roleTitle = "ROLE_TYPE";
+				var roleValue = "ROLE_ID";
+				var roleDropDownList = roleID;
 
-			var departmentQuery = "SELECT DEPARTMENT_ID, DEPARTMENT_NAME FROM DEPARTMENTS";
-			var departmentTitle = "DEPARTMENT_NAME";
-			var departmentValue = "DEPARTMENT_ID";
-            var departmentDropDownList = departmentID;
+				var departmentQuery = "SELECT DEPARTMENT_ID, DEPARTMENT_NAME FROM DEPARTMENTS";
+				var departmentTitle = "DEPARTMENT_NAME";
+				var departmentValue = "DEPARTMENT_ID";
+				var departmentDropDownList = departmentID;
 
-			var supervisorQuery = "SELECT EMPLOYEE_ID, FULL_NAME FROM EMPLOYEES";
-			var supervisorTitle = "FULL_NAME";
-			var supervisorValue = "EMPLOYEE_ID";
-			var supervisorDropDownList = supervisorID;
+				var supervisorQuery = "SELECT EMPLOYEE_ID, FULL_NAME FROM EMPLOYEES";
+				var supervisorTitle = "FULL_NAME";
+				var supervisorValue = "EMPLOYEE_ID";
+				var supervisorDropDownList = supervisorID;
 
-			_dataLayer.FillDropDown(roleQuery, roleDropDownList, roleTitle, roleValue);
-            _dataLayer.FillDropDown(departmentQuery, departmentDropDownList, departmentTitle, departmentValue);
-            _dataLayer.FillDropDown(supervisorQuery, supervisorDropDownList, supervisorTitle, supervisorValue);
-
-			_dataLayer.FillGridView(query, gridView);
+				_dataLayer.FillDropDown(roleQuery, roleDropDownList, roleTitle, roleValue);
+				_dataLayer.FillDropDown(departmentQuery, departmentDropDownList, departmentTitle, departmentValue);
+				_dataLayer.FillDropDown(supervisorQuery, supervisorDropDownList, supervisorTitle, supervisorValue);
+			}
         }
 
         protected void ShowMessage(string message, MessageType type)
@@ -67,6 +70,7 @@ namespace EmployeeVotingSystem.Forms.Simple
             _employeeID = gridView.SelectedRow.Cells[1].Text.ToString();
 
 			employeeID.ReadOnly = true;
+
 			employeeID.Text = _employeeID;
             employeeName.Text = gridView.SelectedRow.Cells[2].Text.ToString();
             contactNumber.Text = gridView.SelectedRow.Cells[3].Text.ToString();
@@ -100,10 +104,21 @@ namespace EmployeeVotingSystem.Forms.Simple
                            $"VALUES ({employeeId}, '{employeeName.Text}', {contactNumber.Text}, TO_DATE('{dateOfBirth.Text}', 'YYYY-MM-DD'), TO_DATE('{hireDate.Text}', 'YYYY-MM-DD'), {salary.Text}, '{roleID.Text}', '{departmentID.Text}', {supervisorID.Text})";
 
 
-            var result = _dataLayer.QueryExecution(query, "job");
+            var result = _dataLayer.QueryExecution(query, "Employee");
+
+			labelMessage.Text = result;
+
+			if (result.ToLower().Contains("violation"))
+			{
+				labelMessage.ForeColor = System.Drawing.Color.Red;
+			}
+
+			labelMessage.ForeColor = System.Drawing.Color.Green;
+
+			employeeID.ReadOnly = false;
 
             employeeID.Text = "";
-            employeeName.Text = "";
+			employeeName.Text = "";
             contactNumber.Text = "";
             dateOfBirth.Text = "";
             hireDate.Text = "";
@@ -128,10 +143,15 @@ namespace EmployeeVotingSystem.Forms.Simple
                            $"SUPERVISOR_ID = {supervisorID.Text} " +
                            $"WHERE EMPLOYEE_ID = {employeeID.Text}";
 
-            var result = _dataLayer.QueryExecution(query, "job");
+            var result = _dataLayer.QueryExecution(query, "Employee");
+
+			labelMessage.Text = result;
+			labelMessage.ForeColor = System.Drawing.Color.Purple;
+
+			employeeID.ReadOnly = false;
 
             employeeID.Text = "";
-            employeeName.Text = "";
+			employeeName.Text = "";
             contactNumber.Text = "";
             dateOfBirth.Text = "";
             hireDate.Text = "";
@@ -142,10 +162,15 @@ namespace EmployeeVotingSystem.Forms.Simple
         {
             string query = $"DELETE FROM EMPLOYEES WHERE EMPLOYEE_ID = '{employeeID.Text}'";
 
-            var result = _dataLayer.QueryExecution(query, "job");
+            var result = _dataLayer.QueryExecution(query, "Employee");
+
+			labelMessage.Text = result;
+			labelMessage.ForeColor = System.Drawing.Color.Red;
+			
+            employeeID.ReadOnly = false;
 
             employeeID.Text = "";
-            employeeName.Text = "";
+			employeeName.Text = "";
             contactNumber.Text = "";
             dateOfBirth.Text = "";
             hireDate.Text = "";
@@ -156,8 +181,10 @@ namespace EmployeeVotingSystem.Forms.Simple
 
         protected void ClearTextFields(object sender, EventArgs e)
         {
+			employeeID.ReadOnly = false;
+
             employeeID.Text = "";
-            employeeName.Text = "";
+			employeeName.Text = "";
             contactNumber.Text = "";
             dateOfBirth.Text = "";
             hireDate.Text = "";

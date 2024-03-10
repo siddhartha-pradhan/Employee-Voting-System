@@ -27,6 +27,9 @@
                         <asp:RegularExpressionValidator ID="MaxSalValidation" ControlToValidate="maxSalary" runat="server" ErrorMessage="Only numbers are allowed" CssClass="ms-1 text-danger" ValidationExpression="\d+"></asp:RegularExpressionValidator>
                     </div>
                 </div>
+                <div class="row justify-content-center mt-3 offset-4">
+                    <asp:Label ID="labelMessage" runat="server"><b></b></asp:Label><br />
+                </div>
                 <br />
                 <div class="row justify-content-center offset-1 mb-2">
                     <div class="col-9 offset-1">

@@ -34,7 +34,7 @@ namespace EmployeeVotingSystem.Data
             try
             {
                 _connection.Open();
-                _message = "Connection Successfully Esatblished";
+                _message = "Connection Successfully Established";
                 return true;
             }
             catch (Exception ex)
@@ -90,7 +90,7 @@ namespace EmployeeVotingSystem.Data
             {
                 if(ex.ToString().ToLower().Contains("unique constraint"))
                 {
-                    result = _message = $"Unable to add record, record with the same ID found.";
+                    result = _message = $"Unable to add record, record violation found.";
                 }
                 else
                 {
@@ -217,7 +217,36 @@ namespace EmployeeVotingSystem.Data
             }
         }
 
-        public string FillGridView(string query, GridView dataGrid)
+		public List<VoteCount> VoteCount()
+		{
+			var voteCount = new List<VoteCount>();
+
+            var query = @"SELECT E.FULL_NAME, COUNT(CANDIDATE_ID) AS TOTAL_VOTES FROM ""Voting.History"" VH " +
+                         "JOIN EMPLOYEES E ON VH.CANDIDATE_ID = E.EMPLOYEE_ID " +
+                         "GROUP BY VH.CANDIDATE_ID, E.FULL_NAME ORDER BY VH.CANDIDATE_ID ";
+
+			using (var connection = new OracleConnection(_connectionString))
+			{
+				connection.Open();
+
+				var command = new OracleCommand(query, connection);
+
+				var reader = command.ExecuteReader();
+
+				while (reader.Read())
+				{
+					voteCount.Add(new VoteCount()
+					{
+						EmployeeName = reader["FULL_NAME"].ToString(),
+						Count = Int32.Parse(reader["TOTAL_VOTES"].ToString())
+					});
+				}
+
+				return voteCount;
+			}
+		}
+
+		public string FillGridView(string query, GridView dataGrid)
         {
             var result = "";
 
@@ -331,4 +360,11 @@ namespace EmployeeVotingSystem.Data
 
         public int Count { get; set; }
     }
+
+	public class VoteCount
+	{
+		public string EmployeeName { get; set; }
+
+		public int Count { get; set; }
+	}
 }

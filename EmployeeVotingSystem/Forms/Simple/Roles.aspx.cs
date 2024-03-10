@@ -18,20 +18,24 @@ namespace EmployeeVotingSystem.Forms.Simple
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            var query = @"SELECT R.ROLE_ID ""Role ID"", R.ROLE_TYPE ""Role Type"", J.JOB_TITLE ""Job Title"" " +
-                         "FROM ROLES R " +
-                         "JOIN JOBS J " +
-                         "ON R.JOB_ID = J.JOB_ID";
+			var query = @"SELECT R.ROLE_ID ""Role ID"", R.ROLE_TYPE ""Role Type"", J.JOB_TITLE ""Job Title"" " +
+						 "FROM ROLES R " +
+						 "JOIN JOBS J " +
+						 "ON R.JOB_ID = J.JOB_ID";
 
-            var jobQuery = "SELECT JOB_ID, JOB_TITLE FROM JOBS";
-            var title = "JOB_TITLE";
-            var value = "JOB_ID";
-
-            var dropDownList = jobID;
-			
-            _dataLayer.FillDropDown(jobQuery, dropDownList, title, value);
-			
 			_dataLayer.FillGridView(query, gridView);
+
+			if (!IsPostBack)
+            {
+
+				var jobQuery = "SELECT JOB_ID, JOB_TITLE FROM JOBS";
+				var title = "JOB_TITLE";
+				var value = "JOB_ID";
+
+				var dropDownList = jobID;
+
+				_dataLayer.FillDropDown(jobQuery, dropDownList, title, value);
+			}
         }
 
         protected void ShowMessage(string message, MessageType type)
@@ -46,6 +50,7 @@ namespace EmployeeVotingSystem.Forms.Simple
             _roleID = gridView.SelectedRow.Cells[1].Text.ToString();
 
             roleID.ReadOnly = true;
+
 			roleID.Text = _roleID;
             roleType.Text = gridView.SelectedRow.Cells[2].Text.ToString();
 
@@ -54,7 +59,15 @@ namespace EmployeeVotingSystem.Forms.Simple
 			jobID.Text = job;
         }
 
-        protected void OnPaging(object sender, GridViewPageEventArgs e)
+		protected void DataBinding(object sender, EventArgs e)
+		{
+			if (jobID.SelectedIndex != -1)
+			{
+				jobID.SelectedIndex = 0;
+			}
+		}
+
+		protected void OnPaging(object sender, GridViewPageEventArgs e)
         {
             gridView.PageIndex = e.NewPageIndex;
             gridView.DataBind();
@@ -62,14 +75,25 @@ namespace EmployeeVotingSystem.Forms.Simple
 
         protected void AddRole(object sender, EventArgs e)
         {
-            string query = $"INSERT INTO " +
+			string query = $"INSERT INTO " +
                            $"ROLES (ROLE_ID, ROLE_TYPE, JOB_ID) " +
                            $"VALUES ('{roleID.Text}', '{roleType.Text}', '{jobID.Text}')";
 
-            var result = _dataLayer.QueryExecution(query, "Job");
+            var result = _dataLayer.QueryExecution(query, "Role");
+
+			labelMessage.Text = result;
+
+			if (result.ToLower().Contains("violation"))
+			{
+				labelMessage.ForeColor = System.Drawing.Color.Red;
+			}
+
+			labelMessage.ForeColor = System.Drawing.Color.Green;
+
+			roleID.ReadOnly = false;
 
             roleID.Text = "";
-            roleType.Text = "";
+			roleType.Text = "";
         }
 
         protected void NotifyFunction(object sender, EventArgs e)
@@ -84,9 +108,14 @@ namespace EmployeeVotingSystem.Forms.Simple
                            $"JOB_ID = '{jobID.Text}' " +
                            $"WHERE ROLE_ID = '{roleID.Text}' ";
 
-            var result = _dataLayer.QueryExecution(query, "job");
+            var result = _dataLayer.QueryExecution(query, "Role");
 
-            roleID.Text = "";
+			labelMessage.Text = result;
+			labelMessage.ForeColor = System.Drawing.Color.Purple;
+
+			roleID.ReadOnly = false;
+
+			roleID.Text = "";
             roleType.Text = "";
         }
 
@@ -94,9 +123,14 @@ namespace EmployeeVotingSystem.Forms.Simple
         {
             string query = $"DELETE FROM ROLES WHERE ROLE_ID = '{roleID.Text}'";
 
-            var result = _dataLayer.QueryExecution(query, "job");
+            var result = _dataLayer.QueryExecution(query, "Role");
 
-            roleID.Text = "";
+			labelMessage.Text = result;
+			labelMessage.ForeColor = System.Drawing.Color.Red;
+
+			roleID.ReadOnly = false;
+
+			roleID.Text = "";
             roleType.Text = "";
         }
 

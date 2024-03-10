@@ -58,8 +58,17 @@ namespace EmployeeVotingSystem.Forms.Simple
 
             labelMessage.Text = result;
 
+            if (result.ToLower().Contains("violation"))
+            {
+				labelMessage.ForeColor = System.Drawing.Color.Red;
+			}
+
+			labelMessage.ForeColor = System.Drawing.Color.Green;
+
+			departmentID.ReadOnly = false;
+
             departmentID.Text = "";
-            departmentName.Text = "";
+			departmentName.Text = "";
             departmentFloor.Text = "";
 
         }
@@ -72,17 +81,19 @@ namespace EmployeeVotingSystem.Forms.Simple
         protected void UpdateDepartment(object sender, EventArgs e)
         {
             string query = $"UPDATE DEPARTMENTS " +
-                           $"SET DEPARTMENT_ID = '{departmentID.Text}', " +
-                           $"DEPARTMENT_NAME = '{departmentName.Text}', " +
+                           $"SET DEPARTMENT_NAME = '{departmentName.Text}', " +
                            $"FLOOR = {departmentFloor.Text} " +
                            $"WHERE DEPARTMENT_ID = '{departmentID.Text}'";
 
             var result = _dataLayer.QueryExecution(query, "Department");
             
             labelMessage.Text = result;
+			labelMessage.ForeColor = System.Drawing.Color.Blue;
 
-            departmentID.Text = "";
-            departmentName.Text = "";
+			departmentID.ReadOnly = false;
+
+			departmentID.Text = "";
+			departmentName.Text = "";
             departmentFloor.Text = "";
         }
 
@@ -93,9 +104,12 @@ namespace EmployeeVotingSystem.Forms.Simple
             var result = _dataLayer.QueryExecution(query, "Department");
 
             labelMessage.Text = result;
+			labelMessage.ForeColor = System.Drawing.Color.Red;
 
-            departmentID.Text = "";
-            departmentName.Text = "";
+			departmentID.ReadOnly = false;
+
+			departmentID.Text = "";
+			departmentName.Text = "";
             departmentFloor.Text = "";
         }
 

@@ -29,7 +29,6 @@
                         <asp:Label runat="server" AssociatedControlID="hireDate" CssClass="m-1"><b>Hire Date</b></asp:Label><br />
                         <asp:TextBox runat="server" required="required" Enabled="True" TextMode="Date" name="BrandName" ID="hireDate" class="form-control input-sm" placeholder="Hire Date"></asp:TextBox>
                     </div>
-                    
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-md-3">
@@ -52,8 +51,11 @@
                         <asp:DropDownList runat="server" required="required" Enabled="True" ID="supervisorID" class="form-select input-sm"></asp:DropDownList>
                     </div>
                 </div>
+                <div class="row justify-content-center offset-4">
+                    <asp:Label ID="labelMessage" runat="server"><b></b></asp:Label><br />
+                </div>
                 <br />
-                <div class="row justify-content-center offset-1 mb-2">
+                <div class="row justify-content-center offset-1 mt-3 mb-2">
                     <div class="col-9 offset-1">
                         <asp:Button Text="Add" ID="addButton" OnClick="AddEmployee" CssClass="btn btn-primary text-white" Width="135px" runat="server" />
                         <asp:Button Text="Update" ID="updateButton" OnClick="UpdateEmployee" CssClass="btn btn-secondary text-dark" Width="135px" runat="server" />

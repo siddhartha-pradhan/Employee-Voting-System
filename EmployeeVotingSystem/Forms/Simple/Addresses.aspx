@@ -26,6 +26,9 @@
                         <asp:RegularExpressionValidator ID="ZipValidation" ControlToValidate="zip" runat="server" ErrorMessage="Enter a 5 digit ZIP Code" CssClass="ms-1 text-danger" ValidationExpression="\d{5}"></asp:RegularExpressionValidator>
                     </div>
                 </div>
+                <div class="row justify-content-center mt-3 offset-4">
+                    <asp:Label ID="labelMessage" runat="server"><b></b></asp:Label><br />
+                </div>
                 <br />
                 <div class="row justify-content-center offset-1 mb-2">
                     <div class="col-9 offset-1">

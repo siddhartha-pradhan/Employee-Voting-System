@@ -37,6 +37,7 @@ namespace EmployeeVotingSystem.Forms.Simple
             _jobID = gridView.SelectedRow.Cells[1].Text.ToString();
 
             jobID.ReadOnly = true;
+
             jobID.Text = _jobID;
             jobTitle.Text = gridView.SelectedRow.Cells[2].Text.ToString();
             minSalary.Text = gridView.SelectedRow.Cells[3].Text.ToString();
@@ -56,10 +57,21 @@ namespace EmployeeVotingSystem.Forms.Simple
                            $"VALUES ('{jobID.Text}', '{jobTitle.Text}', {minSalary.Text}, {maxSalary.Text})";
 
 
-            var result = _dataLayer.QueryExecution(query, "job");
+            var result = _dataLayer.QueryExecution(query, "Job");
+
+			labelMessage.Text = result;
+
+			if (result.ToLower().Contains("violation"))
+			{
+				labelMessage.ForeColor = System.Drawing.Color.Red;
+			}
+
+			labelMessage.ForeColor = System.Drawing.Color.Green;
+
+			jobID.ReadOnly = false;
 
             jobID.Text = "";
-            jobTitle.Text = "";
+			jobTitle.Text = "";
             minSalary.Text = "";
             maxSalary.Text = "";
         }
@@ -77,10 +89,15 @@ namespace EmployeeVotingSystem.Forms.Simple
                            $"MAX_SALARY = {maxSalary.Text} " +
                            $"WHERE JOB_ID = '{jobID.Text}' ";
 
-            var result = _dataLayer.QueryExecution(query, "job");
+            var result = _dataLayer.QueryExecution(query, "Job");
+
+			labelMessage.Text = result;
+			labelMessage.ForeColor = System.Drawing.Color.Purple;
+
+			jobID.ReadOnly = false;
 
             jobID.Text = "";
-            jobTitle.Text = "";
+			jobTitle.Text = "";
             minSalary.Text = "";
             maxSalary.Text = "";
         }
@@ -89,10 +106,15 @@ namespace EmployeeVotingSystem.Forms.Simple
         {
             string query = $"DELETE FROM JOBS WHERE JOB_ID = '{jobID.Text}'";
 
-            var result = _dataLayer.QueryExecution(query, "job");
+            var result = _dataLayer.QueryExecution(query, "Job");
+
+			labelMessage.Text = result;
+			labelMessage.ForeColor = System.Drawing.Color.Red;
+
+			jobID.ReadOnly = false;
 
             jobID.Text = "";
-            jobTitle.Text = "";
+			jobTitle.Text = "";
             minSalary.Text = "";
             maxSalary.Text = "";
         }
@@ -102,7 +124,7 @@ namespace EmployeeVotingSystem.Forms.Simple
 			jobID.ReadOnly = false;
 
 			jobID.Text = "";
-            jobTitle.Text = "";
+			jobTitle.Text = "";
             minSalary.Text = "";
             maxSalary.Text = "";
         }

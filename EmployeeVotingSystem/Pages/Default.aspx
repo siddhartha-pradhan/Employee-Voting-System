@@ -81,6 +81,21 @@
                         </chartareas>
                     </asp:Chart>
                 </div>
+                <div class="row">
+                    <asp:Chart ID="pieChart" runat="server" Width="1500px" Height="700px" ToolTip="PieChart">
+                        <Titles><asp:Title Text="Total Employee Votes"></asp:Title></Titles>
+                        <series>
+                            <asp:Series Name="EmployeeSeries" ChartArea="ChartAreaEmployee" ChartType="Bar">
+                            </asp:Series>
+                        </series>
+                        <chartareas>
+                            <asp:ChartArea Name="ChartAreaEmployee">
+                                <AxisX Title="Employee Name" Interval="1"></AxisX>
+                                <AxisY Title="Votes"></AxisY>
+                            </asp:ChartArea>
+                        </chartareas>
+                    </asp:Chart>
+                </div>
             </div>
         </div>
     </body>

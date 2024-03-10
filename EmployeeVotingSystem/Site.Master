@@ -64,9 +64,9 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Complex Forms</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="Forms/Complex/JobHistory.aspx">Job History</a>
-                                        <a class="dropdown-item" href="Forms/Complex/VotingHistory.aspx">Voting Record</a>
-                                        <a class="dropdown-item" href="Forms/Complex/VotingRecord.aspx">Employee of the Month</a>
+                                        <a class="dropdown-item" runat="server" href="~/Forms/Complex/JobHistory.aspx">Job History</a>
+                                        <a class="dropdown-item" runat="server" href="~/Forms/Complex/VotingHistory.aspx">Voting Record</a>
+                                        <a class="dropdown-item" runat="server" href="~/Forms/Complex/VotingRecord.aspx">Employee of the Month</a>
                                     </div>
                                 </li>
                             </ul>

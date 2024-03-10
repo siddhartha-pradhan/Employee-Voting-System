@@ -105,6 +105,15 @@ namespace EmployeeVotingSystem.Forms.Simple
 		protected global::System.Web.UI.WebControls.DropDownList supervisorID;
 
 		/// <summary>
+		/// labelMessage control.
+		/// </summary>
+		/// <remarks>
+		/// Auto-generated field.
+		/// To modify move field declaration from designer file to code-behind file.
+		/// </remarks>
+		protected global::System.Web.UI.WebControls.Label labelMessage;
+
+		/// <summary>
 		/// addButton control.
 		/// </summary>
 		/// <remarks>

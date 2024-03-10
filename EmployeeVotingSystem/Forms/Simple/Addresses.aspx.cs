@@ -37,6 +37,7 @@ namespace EmployeeVotingSystem.Forms.Simple
             _addressID = gridView.SelectedRow.Cells[1].Text.ToString();
 
             addressID.ReadOnly = true;
+
             addressID.Text = _addressID;
             address.Text = gridView.SelectedRow.Cells[2].Text.ToString();
             state.Text = gridView.SelectedRow.Cells[3].Text.ToString();
@@ -59,10 +60,21 @@ namespace EmployeeVotingSystem.Forms.Simple
                            $"ADDRESSES (ADDRESS_ID, ADDRESS, STATE, ZIP) " +
                            $"VALUES ({addressId},'{address.Text}', '{state.Text}', {zip.Text})";
 
-            var result = _dataLayer.QueryExecution(query, "Job");
+            var result = _dataLayer.QueryExecution(query, "Address");
+
+			labelMessage.Text = result;
+
+			if (result.ToLower().Contains("violation"))
+			{
+				labelMessage.ForeColor = System.Drawing.Color.Red;
+			}
+
+			labelMessage.ForeColor = System.Drawing.Color.Green;
+
+			addressID.ReadOnly = false;
 
             addressID.Text = "";
-            address.Text = "";
+			address.Text = "";
             state.Text = "";
             zip.Text = "";
         }
@@ -80,9 +92,13 @@ namespace EmployeeVotingSystem.Forms.Simple
                            $"ZIP = {zip.Text} " +
                            $"WHERE ADDRESS_ID = {addressID.Text} ";
 
-			var result = _dataLayer.QueryExecution(query, "Job");
+			var result = _dataLayer.QueryExecution(query, "Address");
+			
+            labelMessage.Text = result;
 
-            addressID.Text = "";
+            labelMessage.ForeColor = System.Drawing.Color.Purple;
+
+			addressID.Text = "";
             address.Text = "";
             state.Text = "";
             zip.Text = "";
@@ -92,18 +108,25 @@ namespace EmployeeVotingSystem.Forms.Simple
         {
             string query = $"DELETE FROM ADDRESSES WHERE ADDRESS_ID = {addressID.Text}";
 
-			var result = _dataLayer.QueryExecution(query, "Job");
+			var result = _dataLayer.QueryExecution(query, "Address");
+			
+            labelMessage.Text = result;
+			labelMessage.ForeColor = System.Drawing.Color.Red;
+
+			addressID.ReadOnly = false;
 
             addressID.Text = "";
-            address.Text = "";
+			address.Text = "";
             state.Text = "";
             zip.Text = "";
         }
 
         protected void ClearTextFields(object sender, EventArgs e)
         {
+            addressID.ReadOnly = false;
+
 			addressID.Text = "";
-            address.Text = "";
+			address.Text = "";
             state.Text = "";
             zip.Text = "";
         }
